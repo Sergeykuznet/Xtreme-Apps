@@ -26,7 +26,9 @@ void can_lin_tools_scene_carbus_analyzer_on_enter(void* context) {
         app->scene_manager, CanLinToolsSceneCarBusAnalyzer, CanLinToolsSceneCarBusAnalyzerStart);
 
     can_lin_tools_view_carbus_analyzer_set_callback(
-        app->can_lin_tools_carbus_analyzer_view, can_lin_tools_scene_carbus_analyzer_callback, app);
+        app->can_lin_tools_carbus_analyzer_view,
+        can_lin_tools_scene_carbus_analyzer_callback,
+        app);
 
     view_dispatcher_switch_to_view(app->view_dispatcher, CanLinToolsViewCarBusAnalyzer);
 }
@@ -49,7 +51,9 @@ bool can_lin_tools_scene_carbus_analyzer_on_event(void* context, SceneManagerEve
                 notification_message(app->notifications, &sequence_error);
             } else {
                 scene_manager_set_scene_state(
-                    app->scene_manager, CanLinToolsSceneCarBusAnalyzer, CanLinToolsSceneCarBusAnalyzerRun);
+                    app->scene_manager,
+                    CanLinToolsSceneCarBusAnalyzer,
+                    CanLinToolsSceneCarBusAnalyzerRun);
             }
 
             notification_message(app->notifications, &sequence_solid_yellow);

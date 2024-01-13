@@ -9,8 +9,7 @@ void (*const can_lin_tools_scene_on_enter_handlers[])(void*) = {
 
 // Generate scene on_event handlers array
 #define ADD_SCENE(prefix, name, id) prefix##_scene_##name##_on_event,
-bool (*const can_lin_tools_scene_on_event_handlers[])(void* context, SceneManagerEvent event) =
-    {
+bool (*const can_lin_tools_scene_on_event_handlers[])(void* context, SceneManagerEvent event) = {
 #include "can_lin_tools_scene_config.h"
 };
 #undef ADD_SCENE

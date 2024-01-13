@@ -2,7 +2,6 @@
 
 #include <furi_hal.h>
 
-
 typedef struct CanChacker2Worker CanChacker2Worker;
 
 typedef enum {

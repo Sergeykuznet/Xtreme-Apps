@@ -132,9 +132,11 @@ CanLinToolsCarBusAnalyzerView* can_lin_tools_view_carbus_analyzer_alloc() {
     // View allocation and configuration
     instance->view = view_alloc();
 
-    view_allocate_model(instance->view, ViewModelTypeLocking, sizeof(CanLinToolsCarBusAnalyzerModel));
+    view_allocate_model(
+        instance->view, ViewModelTypeLocking, sizeof(CanLinToolsCarBusAnalyzerModel));
     view_set_context(instance->view, instance);
-    view_set_draw_callback(instance->view, (ViewDrawCallback)can_lin_tools_view_carbus_analyzer_draw);
+    view_set_draw_callback(
+        instance->view, (ViewDrawCallback)can_lin_tools_view_carbus_analyzer_draw);
     view_set_input_callback(instance->view, can_lin_tools_view_carbus_analyzer_input);
     view_set_enter_callback(instance->view, can_lin_tools_view_carbus_analyzer_enter);
     view_set_exit_callback(instance->view, can_lin_tools_view_carbus_analyzer_exit);

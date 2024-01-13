@@ -2,7 +2,6 @@
 
 #include <furi_hal.h>
 
-
 typedef struct CarBusAnalyzerWorker CarBusAnalyzerWorker;
 
 typedef enum {
