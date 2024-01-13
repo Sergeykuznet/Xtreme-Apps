@@ -22,8 +22,72 @@ extern "C" {
 #endif
 //-----------------------------------------------------------------------------
 
+inline eERRORRESULT MCP251XFD_ReadSFR8(MCP251XFD *pComp, uint16_t address, uint8_t* data)
+{
+  return MCP251XFD_ReadData(pComp, address, data, 1);
+}
 
+inline eERRORRESULT MCP251XFD_ReadSFR16(MCP251XFD *pComp, uint16_t address, uint16_t* data)
+{
+  if (data == NULL) return ERR__PARAMETER_ERROR;
+  MCP251XFD_uint16t_Conv Tmp;
+  eERRORRESULT Error = MCP251XFD_ReadData(pComp, address, &Tmp.Bytes[0], 2);
+  *data = Tmp.Uint16;
+  return Error;
+}
 
+inline eERRORRESULT MCP251XFD_ReadSFR32(MCP251XFD *pComp, uint16_t address, uint32_t* data)
+{
+  if (data == NULL) return ERR__PARAMETER_ERROR;
+  MCP251XFD_uint32t_Conv Tmp;
+  eERRORRESULT Error = MCP251XFD_ReadData(pComp, address, &Tmp.Bytes[0], 4);
+  *data = Tmp.Uint32;
+  return Error;
+}
+
+inline eERRORRESULT MCP251XFD_ReadRAM32(MCP251XFD *pComp, uint16_t address, uint32_t* data)
+{
+  if (data == NULL) return ERR__PARAMETER_ERROR;
+  MCP251XFD_uint32t_Conv Tmp;
+  eERRORRESULT Error = MCP251XFD_ReadData(pComp, address, &Tmp.Bytes[0], 4);
+  *data = Tmp.Uint32;
+  return Error;
+}
+
+inline eERRORRESULT MCP251XFD_WriteSFR8(MCP251XFD *pComp, uint16_t address, const uint8_t data)
+{
+  return MCP251XFD_WriteData(pComp, address, &data, 1);
+}
+
+inline eERRORRESULT MCP251XFD_WriteSFR16(MCP251XFD *pComp, uint16_t address, const uint16_t data)
+{
+  MCP251XFD_uint16t_Conv Tmp;
+  Tmp.Uint16 = data;
+  eERRORRESULT Error = MCP251XFD_WriteData(pComp, address, &Tmp.Bytes[0], 2);
+  return Error;
+}
+
+inline eERRORRESULT MCP251XFD_WriteSFR32(MCP251XFD *pComp, uint16_t address, const uint32_t data)
+{
+  MCP251XFD_uint32t_Conv Tmp;
+  Tmp.Uint32 = data;
+  eERRORRESULT Error = MCP251XFD_WriteData(pComp, address, &Tmp.Bytes[0], 4);
+  return Error;
+}
+
+eERRORRESULT MCP251XFD_WriteRAM32(MCP251XFD *pComp, uint16_t address, uint32_t data)
+{
+  MCP251XFD_uint32t_Conv Tmp;
+  Tmp.Uint32 = data;
+  eERRORRESULT Error = MCP251XFD_WriteData(pComp, address, &Tmp.Bytes[0], 4);
+  return Error;
+}
+
+inline eERRORRESULT MCP251XFD_GetReceivePendingInterruptStatusOfAllFIFO(MCP251XFD *pComp, setMCP251XFD_InterruptOnFIFO* interruptPending)
+{
+  if (interruptPending == NULL) return ERR__PARAMETER_ERROR;
+  return MCP251XFD_GetReceiveInterruptStatusOfAllFIFO(pComp, interruptPending, NULL);
+}
 
 
 //=============================================================================
