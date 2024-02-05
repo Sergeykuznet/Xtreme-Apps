@@ -10,7 +10,11 @@ void tracker_engine_init(TrackerEngine* tracker_engine, uint8_t rate, SoundEngin
     memset(tracker_engine, 0, sizeof(TrackerEngine));
 
     furi_hal_interrupt_set_isr_ex(
-        FuriHalInterruptIdTIM2, 14, tracker_engine_timer_isr, (void*)tracker_engine);
+        FuriHalInterruptIdTIM2,
+        FuriHalInterruptPriorityHighest,
+        tracker_engine_timer_isr,
+        (void*)tracker_engine);
+
     tracker_engine_init_hardware(rate);
 
     tracker_engine->sound_engine = sound_engine;
@@ -38,7 +42,8 @@ void tracker_engine_deinit_song(TrackerSong* song, bool free_song) {
 void tracker_engine_deinit(TrackerEngine* tracker_engine, bool free_song) {
     tracker_engine_deinit_song(tracker_engine->song, free_song);
 
-    furi_hal_interrupt_set_isr_ex(FuriHalInterruptIdTIM2, 13, NULL, NULL);
+    furi_hal_interrupt_set_isr_ex(
+        FuriHalInterruptIdTIM2, FuriHalInterruptPriorityHighest, NULL, NULL);
     tracker_engine_stop();
 }
 
